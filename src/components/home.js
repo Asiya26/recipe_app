@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import {Link} from "react-router-dom"
 
 import {
   Spinner,
@@ -15,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-function Home() {
+function Home(props) {
   const [userData, setData] = useState([]);
   const [searchText, setSearchText] = useState("avocado");
   const [mealType, setMealType] = useState("breakfast");
@@ -40,6 +41,10 @@ function Home() {
   const handleChangeMealType = (event) => {
     setMealType(event.target.value);
   };
+
+  const sendObject=(item)=>{
+props.bringCardObject(item)
+  }
 
   useEffect(() => {
     const apiID = "dd95e753";
@@ -69,6 +74,7 @@ function Home() {
                   <MenuItem value='dinner'>Dinner</MenuItem>
                   <MenuItem value='snack'>Snack</MenuItem>
 
+
                 </Select>
               </FormControl>
             </Box>
@@ -95,8 +101,12 @@ function Home() {
                     <CardTitle tag="h5">
                       {item.recipe.label.slice(0, 20)}...
                     </CardTitle>
+                    <Link to="/details/recipe">
 
-                    <Button>More...</Button>
+                    <Button onClick={()=>sendObject(item)}>
+                      More...
+                    </Button>
+                    </Link>
                   </CardBody>
                 </Card>
               </div>

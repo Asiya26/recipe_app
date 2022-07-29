@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom"
 import { Dropdown } from "reactstrap";
 import {Nav,NavItem,NavLink} from "reactstrap"
-function Navigation(){
+function Navigation(props){
     return(
         <div style={{borderBottom:"2px solid teal"}}>
             <Nav pills>
@@ -30,10 +30,13 @@ function Navigation(){
             </NavItem>
             <NavItem>
             <NavLink
-              disabled
-              href="#"
             >
-             Contacts
+              <Link to="/login" >
+                <div onClick={()=>props.setLoggedInOrNot(false)}>
+              {props.loggedIn ? "Logout" : "Login"}
+              </div>
+              </Link>
+             
             </NavLink>
             </NavItem>
             </Nav>
